@@ -1,0 +1,2 @@
+class SmartAdaptor < ApplicationRecord
+end

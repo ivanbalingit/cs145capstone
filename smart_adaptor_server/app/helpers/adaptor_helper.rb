@@ -1,0 +1,2 @@
+module AdaptorHelper
+end
