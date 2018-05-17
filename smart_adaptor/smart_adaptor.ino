@@ -2,7 +2,7 @@
 #include <ArduinoJson.h>
 
 #define RELAY_PIN A0
-#define OPTO_PIN A5
+#define OPTO_PIN 5
 
 // Ethernet interface mac address, must be unique on the LAN
 static byte mymac[] = { 0x74,0x69,0x69,0x2D,0x30,0x31 };
@@ -17,7 +17,7 @@ StaticJsonBuffer<200> jsonBuffer;
 // Called when the client request is complete
 static void my_callback (byte status, word off, word len) {
   Serial.println(">>>");
-  Ethernet::buffer[off+300] = 0;
+  Ethernet::buffer[off+450] = 0;
   Serial.println((const char*) Ethernet::buffer + 384);
   
   // Parse JSON from HTTP reply
@@ -72,11 +72,13 @@ void loop () {
     timer = millis() + 1000;
     
     boolean opto_state = digitalRead(OPTO_PIN);
-    const char *link_t = "get_state?name=adaptor1&opto_state=true";
-    const char *link_f = "get_state?name=adaptor1&opto_state=false";
+    
+    const char *link_t = "get_state?name=adaptor1&ard=true&opto_state=true";
+    const char *link_f = "get_state?name=adaptor1&ard=true&opto_state=false";
     const char *link = opto_state ? link_t : link_f;
     
     Serial.println();
+    Serial.println(opto_state);
     Serial.println(link);
     Serial.print("<<< REQ ");
     ether.browseUrl(PSTR("/adaptor/"), link, "", my_callback);

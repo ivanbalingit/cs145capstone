@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508071741) do
+ActiveRecord::Schema.define(version: 20180512152014) do
 
   create_table "smart_adaptors", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180508071741) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "opto_state"
+    t.datetime "last_on"
   end
 
 end
